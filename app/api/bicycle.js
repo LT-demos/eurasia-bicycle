@@ -1,10 +1,15 @@
 import express from 'express';
 import {Bicycle} from '../db/schema';
+import _ from 'lodash';
 const router = express.Router();
 
 router.post('/', function (req, res, next) {
     const bicycleId = req.body.bicycleId;
     const password = req.body.password;
+
+    if(_.isEmpty(bicycleId)){
+        return res.status(400).send('你没有输入车牌号');
+    }
 
     Bicycle.findOne({bicycleId: bicycleId}, (err, bicycleInfo) => {
         if (err) return next(err);

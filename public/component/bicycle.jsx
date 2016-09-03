@@ -17,7 +17,7 @@ export default class Bicycle extends Component {
                 <div className="title col-md-12"><h2>Eurasia-Bicycle</h2></div>
                 <div className="form-group">
                     <label>车牌号:</label>
-                    <input type="bicycleId" className="form-control" id="bicycleId"
+                    <input type="Number" min="0"  className="form-control" id="bicycleId"
                            placeholder="请输入车牌号" required
                            value={this.state.bicycleId}
                            onChange={this._onNameChange.bind(this)}/>
