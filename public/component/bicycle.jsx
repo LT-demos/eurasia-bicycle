@@ -14,7 +14,7 @@ export default class Bicycle extends Component {
     render() {
         return <form onSubmit={this._onSubmit.bind(this)}>
             <div className="bicycle">
-                <div className="title col-md-12"><h2>Eurasia-Bicycle</h2></div>
+                <div className="title col-md-12"><h2>Eurasia-Bicycle(测试版)</h2></div>
                 <div className="form-group">
                     <label>车牌号:</label>
                     <input type="Number" min="0"  className="form-control" id="bicycleId"
