@@ -22,8 +22,9 @@ export default class Bicycle extends Component {
                            value={this.state.bicycleId}
                            onChange={this._onNameChange.bind(this)}/>
                 </div>
-                <input type="submit" value="获取密码" className="btn btn-primary"/>
-                <div id="div1"></div>
+                <input type="submit" value="获取密码" className="btn btn-primary btn-bicycle"/>
+                <hr/>
+                <div id="div1" className="result "></div>
             </div>
         </form>
     }
@@ -46,7 +47,7 @@ export default class Bicycle extends Component {
                     this.setState({
                         password: res.text
                     });
-                    $("#div1").html('你懂的:' + this.state.password + '</a>');
+                    $("#div1").html('<h2>'+'你懂的:'+'<br/>' +this.state.password + '</h2>');
 
                 }
             });
