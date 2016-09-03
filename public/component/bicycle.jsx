@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import request from 'superagent';
-require("../css/bicycle.css");
+// require("../css/bicycle.css");
 
 export default class Bicycle extends Component {
     constructor(props) {
@@ -13,8 +13,8 @@ export default class Bicycle extends Component {
 
     render() {
         return <form onSubmit={this._onSubmit.bind(this)}>
-            <div className="register">
-                <div className="title"><h3>Eurasia-Bicycle</h3></div>
+            <div className="bicycle">
+                <div className="title col-md-12"><h2>Eurasia-Bicycle</h2></div>
                 <div className="form-group">
                     <label>车牌号:</label>
                     <input type="bicycleId" className="form-control" id="bicycleId"
