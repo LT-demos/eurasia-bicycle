@@ -13,6 +13,9 @@ export default class Index extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div>
+                    {this.props.children}
+                </div>
             </div>
         );
     }
