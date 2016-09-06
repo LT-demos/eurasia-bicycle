@@ -7,8 +7,19 @@ export default class Bicycle extends Component {
         super(props);
         this.state = {
             bicycleId: '',
-            password: ''
+            password: '',
+            userCount: ''
         }
+    }
+
+    componentDidMount() {
+        request.get('/api/bicycle/userCount')
+            .end((err, res) => {
+                this.setState({
+                    userCount: res.body.count
+                });
+            });
+
     }
 
     render() {
@@ -27,6 +38,8 @@ export default class Bicycle extends Component {
                 </div>
                 <input type="submit" value="获取密码" className="btn btn-primary btn-bicycle"/>
                 <hr/>
+                <div id="div2">已有 <span className="userCount">{this.state.userCount}</span> 人成功!</div>
+
                 <div id="div1" className="result "></div>
             </div>
         </form>
@@ -48,7 +61,8 @@ export default class Bicycle extends Component {
                     $("#div1").html(res.text);
                 } else {
                     this.setState({
-                        password: res.text
+                        password: res.body.password,
+                        userCount: res.body.count
                     });
                     $("#div1").html('<h2>' + '你懂的:' + '<br/>' + this.state.password + '</h2>');
 

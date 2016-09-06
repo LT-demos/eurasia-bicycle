@@ -8,9 +8,15 @@ const bicycleSchema = new Schema({
     password: String
 });
 
+const userNumberSchema = new Schema({
+    number: Number
+});
+
 const Bicycle = mongoose.model('Bicycle', bicycleSchema);
+const UserNumber = mongoose.model('UserNumber', userNumberSchema);
 
 
 export {
-    Bicycle
+    Bicycle,
+    UserNumber
 };

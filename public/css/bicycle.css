@@ -1,27 +1,32 @@
 body {
     /*font-family: sans-serif;*/
     /*font-size: x-large;*/
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .bicycle h2 {
     text-align: center;
 }
 
-.bicycle .result{
-    font-size: x-large;
-    text-align: center;
-    margin-top: 5%;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+.bicycle .userCount {
+    font-size: 20px;
     color: red;
 }
 
-.bicycle .btn-bicycle{
+.bicycle .result {
+    font-size: x-large;
+    text-align: center;
+    margin-top: 5%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: red;
+}
+
+.bicycle .btn-bicycle {
     width: 100%;
 }
 
 /*span {*/
-    /*float: right;*/
+/*float: right;*/
 /*}*/
 
 .bicycle {
