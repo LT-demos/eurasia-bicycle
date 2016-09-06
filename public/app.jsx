@@ -1,5 +1,6 @@
 import React from 'react';
 import Bicycle from './component/bicycle.jsx'
+import Bottom from './component/bottom.jsx';
 
 
 export default class Index extends React.Component {
@@ -14,6 +15,7 @@ export default class Index extends React.Component {
                 <div>
                     {this.props.children}
                 </div>
+                <Bottom/>
             </div>
         );
     }

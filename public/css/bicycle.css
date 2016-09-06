@@ -4,6 +4,9 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.bicycle .title{
+    text-align: center;
+}
 .bicycle h2 {
     text-align: center;
 }
@@ -13,10 +16,13 @@ body {
     color: red;
 }
 
+.weixin-img{
+    width: 100px;
+}
 .bicycle .result {
     font-size: x-large;
     text-align: center;
-    margin-top: 5%;
+    margin-top: 4%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: red;
 }
@@ -35,5 +41,9 @@ body {
     /*!*padding-left: 8%;*!*/
     /*margin-left: 20%;*/
     margin-top: 20%;
+}
+
+.weixin-bottom {
+    text-align: center;
 }
 

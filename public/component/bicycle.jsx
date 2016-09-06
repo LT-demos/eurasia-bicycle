@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import request from 'superagent';
 // require("../css/bicycle.css");
+import Bottom from './bottom.jsx';
 
 export default class Bicycle extends Component {
     constructor(props) {
@@ -26,7 +27,8 @@ export default class Bicycle extends Component {
         return <form onSubmit={this._onSubmit.bind(this)}>
             <div className="bicycle">
                 <div className="title col-md-12">
-                    <h2>Eurasia-Bicycle(测试版)</h2>
+                    <h2>Eurasia-Bicycles</h2>
+                    <h4>(测试版)</h4>
                     <hr/>
                 </div>
                 <div className="form-group">
@@ -38,14 +40,17 @@ export default class Bicycle extends Component {
                 </div>
                 <input type="submit" value="获取密码" className="btn btn-primary btn-bicycle"/>
                 <hr/>
-                <div id="div2">已有 <span className="userCount">{this.state.userCount}</span> 人成功!</div>
+                <label>
+                    <div id="div2">已成功 <span className="userCount">{this.state.userCount}</span> 次</div>
+                </label>
 
-                <div id="div1" className="result "></div>
+                <div id="div1" className="result"></div>
             </div>
         </form>
     }
 
     _onNameChange(event) {
+        $("#div1").html('');
         this.setState({
             bicycleId: event.target.value
         });
@@ -58,7 +63,7 @@ export default class Bicycle extends Component {
             .query({bicycleId: this.state.bicycleId})
             .end((err, res) => {
                 if (res.statusCode === 401) {
-                    $("#div1").html(res.text);
+                    $("#div1").html(res.text + '<br/>');
                 } else {
                     this.setState({
                         password: res.body.password,
