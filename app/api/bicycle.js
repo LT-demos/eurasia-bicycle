@@ -58,7 +58,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/userCount', function (req, res, next) {
-    UserNumber.findOne({_id: '57cecbd4204510f9037ff071'}, (err, data) => {
+    UserNumber.findOne({id: 1}, (err, data) => {
         res.status(200).send({count: data.number});
     });
 });
