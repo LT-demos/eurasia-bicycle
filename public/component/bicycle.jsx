@@ -41,7 +41,7 @@ export default class Bicycle extends Component {
                 <input type="submit" value="获取密码" className="btn btn-primary btn-bicycle"/>
                 <hr/>
                 <label>
-                    <div id="div2">已成功 <span className="userCount">{this.state.userCount}</span> 次</div>
+                    <div id="div2">累计成功 <span className="userCount">{this.state.userCount}</span> 次</div>
                 </label>
 
                 <div id="div1" className="result"></div>
