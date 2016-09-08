@@ -10,7 +10,8 @@ export default class Bicycle extends Component {
             bicycleId: '',
             password: '',
             userCount: '',
-            userViewedCount: ''
+            userViewedCount: '',
+            voteCount: ''
         }
     }
 
@@ -29,6 +30,12 @@ export default class Bicycle extends Component {
             .end((err, res) => {
                 this.setState({
                     userViewedCount: res.body.userViewedCount
+                });
+            });
+        request.get('/api/bicycle/vote')
+            .end((err, res) => {
+                this.setState({
+                    voteCount: res.body.voteCount
                 });
             });
     }
@@ -58,7 +65,7 @@ export default class Bicycle extends Component {
                 <div className="pull-right userViewedCount">
                     阅读:{this.state.userViewedCount}&nbsp;&nbsp;&nbsp;
                     <a className="vote" onClick={this._vote.bind(this)}>&nbsp;<span
-                        className="glyphicon glyphicon-thumbs-up"/><span>10</span></a>
+                        className="glyphicon glyphicon-thumbs-up"/><span>{this.state.voteCount}</span></a>
                 </div>
                 <div id="div1" className="result"></div>
             </div>
@@ -66,7 +73,12 @@ export default class Bicycle extends Component {
     }
 
     _vote() {
-        alert(1)
+        request.get('/api/bicycle/vote')
+            .end((err, res) => {
+                this.setState({
+                    voteCount: res.body.voteCount
+                });
+            });
     }
 
     _onNameChange(event) {

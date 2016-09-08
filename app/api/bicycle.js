@@ -1,5 +1,5 @@
 import express from 'express';
-import {Bicycle, UserNumber, NoPasswordBicycle} from '../db/schema';
+import {Bicycle, UserNumber, NoPasswordBicycle, Vote} from '../db/schema';
 import _ from 'lodash';
 const router = express.Router();
 
@@ -98,6 +98,21 @@ router.delete('/delete', (req, res, next) => {
             res.status(200).send(data);
         });
     });
+});
+
+router.get('/vote', (req, res, next) => {
+    Vote.findOne({id: 3}, (err, data) => {
+        var oldvoteCount = data.voteCount;
+        var newvoteCount = oldvoteCount + 1;
+        Vote.update({voteCount: oldvoteCount}, {voteCount: newvoteCount}, () => {
+            res.status(200).send({voteCount: newvoteCount});
+        });
+    });
+    // var votes = new Vote({
+    //     id: 3,
+    //     voteCount: 0
+    // });
+    // votes.save();
 });
 export default router;
 

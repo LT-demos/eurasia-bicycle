@@ -10,20 +10,26 @@ const bicycleSchema = new Schema({
 
 const userNumberSchema = new Schema({
     number: Number,
-    userViewedCount:Number
+    userViewedCount: Number
 });
 
 const noPasswordBicycleSchema = new Schema({
     noPasswordBicycleId: Number
 });
+const voteSchema = new Schema({
+    id:Number,
+    voteCount: Number
+});
 
 const Bicycle = mongoose.model('Bicycle', bicycleSchema);
 const UserNumber = mongoose.model('UserNumber', userNumberSchema);
 const NoPasswordBicycle = mongoose.model('noPasswordBicycle', noPasswordBicycleSchema);
+const Vote = mongoose.model('vote', voteSchema);
 
 
 export {
     Bicycle,
     UserNumber,
-    NoPasswordBicycle
+    NoPasswordBicycle,
+    Vote
 };
