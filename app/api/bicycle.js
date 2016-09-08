@@ -101,7 +101,10 @@ router.delete('/delete', (req, res, next) => {
 });
 
 router.get('/vote', (req, res, next) => {
-    res.status(200).send({voteCount: data.voteCount});
+    Vote.findOne({id: 3}, (err, data) => {
+            res.status(200).send({voteCount: data.voteCount});
+        // });
+    });
 });
 router.post('/vote', (req, res, next) => {
     Vote.findOne({id: 3}, (err, data) => {
