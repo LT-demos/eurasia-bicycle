@@ -90,4 +90,15 @@ router.get('/noPasswordBicycle', (req, res, next) => {
         res.status(200).send(data)
     });
 });
+
+router.delete('/delete', (req, res, next) => {
+    const noPasswordBicycleId = req.body.noPasswordBicycleId;
+    console.log('++' + noPasswordBicycleId);
+    // console.log('--'+data);
+    NoPasswordBicycle.remove({noPasswordBicycleId: noPasswordBicycleId}, () => {
+        NoPasswordBicycle.find({}, (err, data) => {
+            res.status(200).send(data);
+        });
+    });
+});
 export default router;

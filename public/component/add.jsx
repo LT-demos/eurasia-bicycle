@@ -12,7 +12,8 @@ export default class Add extends Component {
         }
     }
 
-    componentDidMount() {
+
+    componentDidMount(){
         request.get('/api/bicycle/noPasswordBicycle')
             .end((err, res) => {
                 this.setState({
@@ -20,29 +21,57 @@ export default class Add extends Component {
                 });
             });
     }
+    // componentWillUpdate() {
+    //     request.get('/api/bicycle/noPasswordBicycle')
+    //         .end((err, res) => {
+    //             this.setState({
+    //                 noPasswordBicycle: res.body
+    //             });
+    //         });
+    // }
 
     render() {
-        return <form onSubmit={this._onSubmit.bind(this)}>
-            <div className="register container-fluid">
-                <div className="title"><h3>Eurasia-Bicycle</h3></div>
-                <div className="form-group">
-                    <label>车牌号:</label>
-                    <input type="bicycleId" className="form-control" id="bicycleId"
-                           placeholder="请输入车牌号" required
-                           value={this.state.bicycleId}
-                           onChange={this._onBicycleIdChange.bind(this)}/>
-                    <input className="form-control" id="password"
-                           placeholder="请输入密码" required
-                           value={this.state.password}
-                           onChange={this._onPasswordChange.bind(this)}/>
+        return <div>
+            <form onSubmit={this._onSubmit.bind(this)}>
+                <div className="register container-fluid">
+                    <div className="title"><h3>Eurasia-Bicycle</h3></div>
+                    <div className="form-group">
+                        <label>车牌号:</label>
+                        <input type="bicycleId" className="form-control" id="bicycleId"
+                               placeholder="请输入车牌号" required
+                               value={this.state.bicycleId}
+                               onChange={this._onBicycleIdChange.bind(this)}/>
+                        <input className="form-control" id="password"
+                               placeholder="请输入密码" required
+                               value={this.state.password}
+                               onChange={this._onPasswordChange.bind(this)}/>
+                    </div>
+                    <input type="submit" value="录入" className="btn btn-primary"/>
+                    <div id="div1"></div>
+
                 </div>
-                <input type="submit" value="录入" className="btn btn-primary"/>
-                <div id="div1"></div>
-                没密码的车牌号:<div>{this.state.noPasswordBicycle.map(id => <div>
-                    {id.noPasswordBicycleId}<br/>
-                </div>)}</div>
-            </div>
-        </form>;
+            </form>
+            ;
+            没密码的车牌号:
+            <div>{this.state.noPasswordBicycle.map(id => <div>
+                {id.noPasswordBicycleId}
+                <button onClick={this._onDelete(id.noPasswordBicycleId)}>删除</button>
+                <br/>
+            </div>)}</div>
+        </div>
+    }
+
+    _onDelete(event) {
+        return () => {
+            request.delete('/api/bicycle/delete')
+                .send({noPasswordBicycleId:event})
+                .end((err,res) => {
+                    this.setState({
+                        noPasswordBicycle: res.body
+                    });
+                });
+             alert(event);
+        };
     }
 
     _onBicycleIdChange(event) {
