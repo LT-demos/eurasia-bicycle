@@ -13,7 +13,7 @@ export default class Add extends Component {
     }
 
 
-    componentDidMount(){
+    componentDidMount() {
         request.get('/api/bicycle/noPasswordBicycle')
             .end((err, res) => {
                 this.setState({
@@ -21,6 +21,7 @@ export default class Add extends Component {
                 });
             });
     }
+
     // componentWillUpdate() {
     //     request.get('/api/bicycle/noPasswordBicycle')
     //         .end((err, res) => {
@@ -31,9 +32,10 @@ export default class Add extends Component {
     // }
 
     render() {
+        var count = 0;
         return <div>
-            <form onSubmit={this._onSubmit.bind(this)}>
-                <div className="register container-fluid">
+            <div className="register container-fluid">
+                <form onSubmit={this._onSubmit.bind(this)}>
                     <div className="title"><h3>Eurasia-Bicycle</h3></div>
                     <div className="form-group">
                         <label>车牌号:</label>
@@ -49,28 +51,35 @@ export default class Add extends Component {
                     <input type="submit" value="录入" className="btn btn-primary"/>
                     <div id="div1"></div>
 
+
+                </form>
+                没密码的车牌号:
+                <div>
+                    {
+
+                        this.state.noPasswordBicycle.map(bicycle => <div>
+                                {count++}&nbsp;|&nbsp;&nbsp;&nbsp;
+                                {bicycle.noPasswordBicycleId}&nbsp;&nbsp;&nbsp;
+                                <button onClick={this._onDelete(bicycle.noPasswordBicycleId)}>删除</button>
+                            </div>
+                        )
+                    }
+                    共: {count} 辆
                 </div>
-            </form>
-            ;
-            没密码的车牌号:
-            <div>{this.state.noPasswordBicycle.map(id => <div>
-                {id.noPasswordBicycleId}
-                <button onClick={this._onDelete(id.noPasswordBicycleId)}>删除</button>
-                <br/>
-            </div>)}</div>
+            </div>
         </div>
     }
 
     _onDelete(event) {
         return () => {
             request.delete('/api/bicycle/delete')
-                .send({noPasswordBicycleId:event})
-                .end((err,res) => {
+                .send({noPasswordBicycleId: event})
+                .end((err, res) => {
                     this.setState({
                         noPasswordBicycle: res.body
                     });
                 });
-             alert(event);
+            alert(event);
         };
     }
 

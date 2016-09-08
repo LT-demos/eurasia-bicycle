@@ -10,7 +10,7 @@ require("bootstrap-webpack");
 const router = <Router history={hashHistory}>
     <Route path="/" component={App}>
     </Route>
-    <Route path="/add" component={Add}/>
+    {/*<Route path="/add" component={Add}/>*/}
 </Router>;
 
 ReactDOM.render(

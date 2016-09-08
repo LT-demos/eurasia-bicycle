@@ -50,8 +50,8 @@ router.get('/', function (req, res, next) {
                     noPasswordBicycle.save((err) => {
                         if (err) return next(err);
                     });
-                    res.status(401).send("暂时没有这辆车的密码");
                 }
+                res.status(401).send("暂时没有这辆车的密码");
             });
 
         }
@@ -93,12 +93,13 @@ router.get('/noPasswordBicycle', (req, res, next) => {
 
 router.delete('/delete', (req, res, next) => {
     const noPasswordBicycleId = req.body.noPasswordBicycleId;
-    console.log('++' + noPasswordBicycleId);
-    // console.log('--'+data);
-    NoPasswordBicycle.remove({noPasswordBicycleId: noPasswordBicycleId}, () => {
+    NoPasswordBicycle.remove({noPasswordBicycleId: noPasswordBicycleId}, (err) => {
         NoPasswordBicycle.find({}, (err, data) => {
             res.status(200).send(data);
         });
     });
 });
 export default router;
+
+
+
