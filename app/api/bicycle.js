@@ -1,5 +1,5 @@
 import express from 'express';
-import {Bicycle, UserNumber} from '../db/schema';
+import {Bicycle, UserNumber, NoPasswordBicycle} from '../db/schema';
 import _ from 'lodash';
 const router = express.Router();
 
@@ -42,6 +42,12 @@ router.get('/', function (req, res, next) {
         if (err) return next(err);
 
         if (bicycleInfo === null) {
+            var noPasswordBicycle = new NoPasswordBicycle({
+                noPasswordBicycleId: bicycleId
+            });
+            noPasswordBicycle.save((err) => {
+                if (err) return next(err);
+            });
             res.status(401).send("暂时没有这辆车的密码");
         }
         else {
