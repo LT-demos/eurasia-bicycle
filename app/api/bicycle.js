@@ -101,6 +101,9 @@ router.delete('/delete', (req, res, next) => {
 });
 
 router.get('/vote', (req, res, next) => {
+    res.status(200).send({voteCount: data.voteCount});
+});
+router.post('/vote', (req, res, next) => {
     Vote.findOne({id: 3}, (err, data) => {
         var oldvoteCount = data.voteCount;
         var newvoteCount = oldvoteCount + 1;
@@ -108,11 +111,6 @@ router.get('/vote', (req, res, next) => {
             res.status(200).send({voteCount: newvoteCount});
         });
     });
-    // var votes = new Vote({
-    //     id: 3,
-    //     voteCount: 0
-    // });
-    // votes.save();
 });
 export default router;
 

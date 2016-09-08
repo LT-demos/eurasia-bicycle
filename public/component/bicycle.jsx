@@ -22,6 +22,12 @@ export default class Bicycle extends Component {
                     userCount: res.body.count
                 });
             });
+        request.get('/api/bicycle/vote')
+            .end((err, res) => {
+                this.setState({
+                    voteCount: res.body.voteCount
+                });
+            });
 
     }
 
@@ -32,12 +38,7 @@ export default class Bicycle extends Component {
                     userViewedCount: res.body.userViewedCount
                 });
             });
-        request.get('/api/bicycle/vote')
-            .end((err, res) => {
-                this.setState({
-                    voteCount: res.body.voteCount
-                });
-            });
+
     }
 
     render() {
@@ -72,13 +73,14 @@ export default class Bicycle extends Component {
         </form>
     }
 
-    _vote() {
-        request.get('/api/bicycle/vote')
-            .end((err, res) => {
-                this.setState({
-                    voteCount: res.body.voteCount
+    _vote(event) {
+            request.post('/api/bicycle/vote')
+                .end((err, res) => {
+                    this.setState({
+                        voteCount: res.body.voteCount
+                    });
                 });
-            });
+
     }
 
     _onNameChange(event) {
