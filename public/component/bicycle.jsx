@@ -16,7 +16,6 @@ export default class Bicycle extends Component {
     }
 
     componentDidMount() {
-        alert('如果你可以看到这个界面,点个赞吧!');
         request.get('/api/bicycle/userCount')
             .end((err, res) => {
                 this.setState({
@@ -103,6 +102,7 @@ export default class Bicycle extends Component {
                         userCount: res.body.count
                     });
                     $("#div1").html('<h2>' + '你懂的:' + '<br/>' + this.state.password + '</h2>');
+                    alert('点个赞吧!');
 
                 }
             });
