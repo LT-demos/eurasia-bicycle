@@ -68,4 +68,20 @@ router.get('/userCount', function (req, res, next) {
         res.status(200).send({count: data.number});
     });
 });
+
+router.get('/userViewdCount',() => {
+    var userViewedCount = new UserNumber({
+        userViewedCount:1
+    });
+    userViewedCount.save();
+});
+// router.get('/userViewdCount', (req,res,next) => {
+//     UserNumber.findOne({vId: 2}, (err,data) => {
+//         var oldUserViewdCount = data.userViewedCount;
+//         var newUserViewdCount = oldUserViewdCount + 1;
+//         UserNumber.update({userViewedCount:oldUserViewdCount},{userViewedCount:newUserViewdCount},() => {
+//             res.status(200).send({userViewedCount:newUserViewdCount});
+//         });
+//     });
+// });
 export default router;

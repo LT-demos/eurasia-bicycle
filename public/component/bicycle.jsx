@@ -9,7 +9,8 @@ export default class Bicycle extends Component {
         this.state = {
             bicycleId: '',
             password: '',
-            userCount: ''
+            userCount: '',
+            userViewedCount: ''
         }
     }
 
@@ -21,6 +22,15 @@ export default class Bicycle extends Component {
                 });
             });
 
+    }
+
+    componentWillMount() {
+        request.get('/api/bicycle/userViewdCount')
+            .end((err, res) => {
+                this.setState({
+                    userViewedCount: res.body.userViewedCount
+                });
+            });
     }
 
     render() {
@@ -41,9 +51,14 @@ export default class Bicycle extends Component {
                 <input type="submit" value="获取密码" className="btn btn-primary btn-bicycle"/>
                 <hr/>
                 <label>
-                    <div id="div2">累计成功 <span className="userCount">{this.state.userCount}</span> 次</div>
+                    <div id="div2">
+                        累计成功 <span className="userCount">{this.state.userCount}</span> 次
+                    </div>
                 </label>
-
+                <div className="pull-right userViewedCount">
+                    阅读:{this.state.userViewedCount}&nbsp;
+                    <a>赞:&nbsp;<span className="glyphicon glyphicon-thumbs-up vote"/></a>
+                </div>
                 <div id="div1" className="result"></div>
             </div>
         </form>

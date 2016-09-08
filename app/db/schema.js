@@ -9,7 +9,8 @@ const bicycleSchema = new Schema({
 });
 
 const userNumberSchema = new Schema({
-    number: Number
+    number: Number,
+    userViewedCount:Number
 });
 
 const noPasswordBicycleSchema = new Schema({

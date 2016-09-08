@@ -4,9 +4,10 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.bicycle .title{
+.bicycle .title {
     text-align: center;
 }
+
 .bicycle h2 {
     text-align: center;
 }
@@ -16,9 +17,22 @@ body {
     color: red;
 }
 
-.weixin-img{
+.bicycle .userViewedCount {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: darkgrey;
+    font-size: 10px;
+    margin-top: -20px;
+}
+
+.bicycle .vote {
+    font-size: 15px;
+    color: cornflowerblue;
+}
+
+.weixin-img {
     width: 100px;
 }
+
 .bicycle .result {
     font-size: x-large;
     text-align: center;
