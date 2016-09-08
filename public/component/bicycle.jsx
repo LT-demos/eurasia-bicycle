@@ -26,6 +26,7 @@ export default class Bicycle extends Component {
     }
 
     componentWillMount() {
+        alert('如果你可以看到这个界面,点个赞吧!');
         request.get('/api/bicycle/userViewdCount')
             .end((err, res) => {
                 this.setState({
