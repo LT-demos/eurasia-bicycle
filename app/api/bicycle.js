@@ -45,10 +45,15 @@ router.get('/', function (req, res, next) {
             var noPasswordBicycle = new NoPasswordBicycle({
                 noPasswordBicycleId: bicycleId
             });
-            noPasswordBicycle.save((err) => {
-                if (err) return next(err);
+            NoPasswordBicycle.findOne({noPasswordBicycleId: bicycleId}, (err, data) => {
+                if (data === null) {
+                    noPasswordBicycle.save((err) => {
+                        if (err) return next(err);
+                    });
+                    res.status(401).send("暂时没有这辆车的密码");
+                }
             });
-            res.status(401).send("暂时没有这辆车的密码");
+
         }
         else {
             UserNumber.findOne({id: 1}, (err, data) => {
@@ -69,19 +74,20 @@ router.get('/userCount', function (req, res, next) {
     });
 });
 
-// router.get('/userViewdCount',() => {
-//     var userViewedCount = new UserNumber({
-//         userViewedCount:1
-//     });
-//     userViewedCount.save();
-// });
-router.get('/userViewdCount', (req,res,next) => {
-    UserNumber.findOne({vId: 2}, (err,data) => {
+router.get('/userViewdCount', (req, res, next) => {
+    UserNumber.findOne({vId: 2}, (err, data) => {
         var oldUserViewdCount = data.userViewedCount;
         var newUserViewdCount = oldUserViewdCount + 1;
-        UserNumber.update({userViewedCount:oldUserViewdCount},{userViewedCount:newUserViewdCount},() => {
-            res.status(200).send({userViewedCount:newUserViewdCount});
+        UserNumber.update({userViewedCount: oldUserViewdCount}, {userViewedCount: newUserViewdCount}, () => {
+            res.status(200).send({userViewedCount: newUserViewdCount});
         });
+    });
+});
+
+router.get('/noPasswordBicycle', (req, res, next) => {
+    NoPasswordBicycle.find({}, (err, data) => {
+        console.log(data);
+        res.status(200).send(data)
     });
 });
 export default router;

@@ -7,13 +7,23 @@ export default class Add extends Component {
         super(props);
         this.state = {
             bicycleId: '',
-            password: ''
+            password: '',
+            noPasswordBicycle: []
         }
+    }
+
+    componentDidMount() {
+        request.get('/api/bicycle/noPasswordBicycle')
+            .end((err, res) => {
+                this.setState({
+                    noPasswordBicycle: res.body
+                });
+            });
     }
 
     render() {
         return <form onSubmit={this._onSubmit.bind(this)}>
-            <div className="register">
+            <div className="register container-fluid">
                 <div className="title"><h3>Eurasia-Bicycle</h3></div>
                 <div className="form-group">
                     <label>车牌号:</label>
@@ -28,8 +38,11 @@ export default class Add extends Component {
                 </div>
                 <input type="submit" value="录入" className="btn btn-primary"/>
                 <div id="div1"></div>
+                没密码的车牌号:<div>{this.state.noPasswordBicycle.map(id => <div>
+                    {id.noPasswordBicycleId}<br/>
+                </div>)}</div>
             </div>
-        </form>
+        </form>;
     }
 
     _onBicycleIdChange(event) {
