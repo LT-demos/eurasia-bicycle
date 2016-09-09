@@ -89,6 +89,7 @@ export default class Add extends Component {
                             {count++}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 {bicycle.noPasswordBicycleId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button onClick={this._onDelete(bicycle.noPasswordBicycleId)}>删除</button>
+                            <br/>
                             </div>
                         )
                     }
