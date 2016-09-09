@@ -86,7 +86,6 @@ router.get('/userViewdCount', (req, res, next) => {
 
 router.get('/noPasswordBicycle', (req, res, next) => {
     NoPasswordBicycle.find({}, (err, data) => {
-        console.log(data);
         res.status(200).send(data)
     });
 });
@@ -102,8 +101,7 @@ router.delete('/delete', (req, res, next) => {
 
 router.get('/vote', (req, res, next) => {
     Vote.findOne({id: 3}, (err, data) => {
-            res.status(200).send({voteCount: data.voteCount});
-        // });
+        res.status(200).send({voteCount: data.voteCount});
     });
 });
 router.post('/vote', (req, res, next) => {
@@ -113,6 +111,18 @@ router.post('/vote', (req, res, next) => {
         Vote.update({voteCount: oldvoteCount}, {voteCount: newvoteCount}, () => {
             res.status(200).send({voteCount: newvoteCount});
         });
+    });
+});
+
+router.get('/findBicycleId', (req, res, next) => {
+    const bicycleId = req.query.bicycleId;
+    Bicycle.findOne({bicycleId: bicycleId}, (err, data) => {
+        if (err) return next(err);
+
+        if (data !== null) {
+            console.log('已存在');
+            res.status(409).send({bicycleId: data.bicycleId, password: data.password, message: 'is exist'});
+        }
     });
 });
 export default router;

@@ -34,6 +34,33 @@ export default class Add extends Component {
     render() {
         var count = 0;
         return <div>
+
+
+            <button type="button" className="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">
+                Large modal
+            </button>
+
+            <div className="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal"><span
+                                aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
+                            <h4 className="modal-title">Modal title</h4>
+                        </div>
+                        <div className="modal-body">
+                            <p>One fine body&hellip;</p>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div className="register container-fluid">
                 <form onSubmit={this._onSubmit.bind(this)}>
                     <div className="title"><h3>Eurasia-Bicycle</h3></div>
@@ -58,8 +85,9 @@ export default class Add extends Component {
                     {
 
                         this.state.noPasswordBicycle.map(bicycle => <div>
-                                {count++}&nbsp;|&nbsp;&nbsp;&nbsp;
-                                {bicycle.noPasswordBicycleId}&nbsp;&nbsp;&nbsp;
+                            <button onClick={this._onFind(bicycle.noPasswordBicycleId)}>查找</button>
+                            {count++}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {bicycle.noPasswordBicycleId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button onClick={this._onDelete(bicycle.noPasswordBicycleId)}>删除</button>
                             </div>
                         )
@@ -68,6 +96,18 @@ export default class Add extends Component {
                 </div>
             </div>
         </div>
+    }
+
+    _onFind(event) {
+        return () => {
+            request.get('/api/bicycle/findBicycleId')
+                .query({bicycleId: event})
+                .end((err, data) => {
+                    alert(data.body.message);
+                    alert('id:' + data.body.bicycleId+',password:' + data.body.password);
+                });
+            alert('查找:'+event);
+        }
     }
 
     _onDelete(event) {
