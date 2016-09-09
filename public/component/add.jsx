@@ -47,7 +47,7 @@ export default class Add extends Component {
                         <form onSubmit={this._onLogin.bind(this)}>
                             <div className="modal-body">
                                 <p><label>password:</label></p>
-                                <input type="text" className="form-control" id="recipient-name"
+                                <input type="password" className="form-control" id="recipient-name"
                                        required
                                        placeholder="请输入密码"
                                        value={this.state.name}
