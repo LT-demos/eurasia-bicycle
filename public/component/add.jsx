@@ -37,7 +37,7 @@ export default class Add extends Component {
                 Login
             </button>
 
-            <div className="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+            <div className="modal fade bs-example-modal-lg" tabIndex="-1" role="dialog"
                  aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg">
                     <div className="modal-content">

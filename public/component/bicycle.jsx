@@ -66,7 +66,8 @@ export default class Bicycle extends Component {
                 <div className="pull-right userViewedCount">
                     阅读:{this.state.userViewedCount}&nbsp;&nbsp;&nbsp;
                     <a className="vote" onClick={this._vote.bind(this)}>&nbsp;<span
-                        className="glyphicon glyphicon-thumbs-up"/><span>{this.state.voteCount}</span></a>
+                        className="glyphicon glyphicon-thumbs-up"/><span>{this.state.voteCount}</span>
+                    </a>
                 </div>
                 <div id="div1" className="result"></div>
             </div>
@@ -74,12 +75,12 @@ export default class Bicycle extends Component {
     }
 
     _vote(event) {
-            request.post('/api/bicycle/vote')
-                .end((err, res) => {
-                    this.setState({
-                        voteCount: res.body.voteCount
-                    });
+        request.post('/api/bicycle/vote')
+            .end((err, res) => {
+                this.setState({
+                    voteCount: res.body.voteCount
                 });
+            });
 
     }
 
@@ -104,7 +105,7 @@ export default class Bicycle extends Component {
                         userCount: res.body.count
                     });
                     $("#div1").html('<h2>' + '你懂的:' + '<br/>' + this.state.password + '</h2>');
-                    alert('点个赞吧!');
+                    // alert('点个赞吧!');
 
                 }
             });
