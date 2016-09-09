@@ -11,7 +11,8 @@ export default class Add extends Component {
             loginPassword: '',
             bicycleId: '',
             password: '',
-            noPasswordBicycle: []
+            noPasswordBicycle: [],
+            onePassword: ''
         };
     }
 
@@ -26,6 +27,14 @@ export default class Add extends Component {
             });
     }
 
+    componentDidUpdate() {
+        request.get('/api/bicycle/noPasswordBicycle')
+            .end((err, res) => {
+                this.setState({
+                    noPasswordBicycle: res.body
+                });
+            });
+    }
 
     render() {
         var count = 0;
@@ -93,10 +102,18 @@ export default class Add extends Component {
                     <div>
                         {
                             this.state.noPasswordBicycle.map(bicycle => <div>
-                                    <button onClick={this._onFind(bicycle.noPasswordBicycleId)}>查找</button>
+                                    <button className="btn btn-primary" onClick={this._onFind(bicycle.noPasswordBicycleId)}>
+                                        查找
+                                    </button>
                                     {count++}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     {bicycle.noPasswordBicycleId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <button onClick={this._onDelete(bicycle.noPasswordBicycleId)}>删除</button>
+                                    <button className="btn btn-success"
+                                            onClick={this._addToBicycleId(bicycle.noPasswordBicycleId, this._onDelete(bicycle.noPasswordBicycleId))}>
+                                        Add
+                                    </button>
+                                    <button ref="btnDelete" className="btn btn-danger"
+                                            onClick={this._onDelete(bicycle.noPasswordBicycleId)}>删除
+                                    </button>
                                     <br/>
                                 </div>
                             )
@@ -111,6 +128,17 @@ export default class Add extends Component {
 
 
         </div>
+    }
+
+
+    _addToBicycleId(event, func) {
+        return () => {
+            this.setState({
+                bicycleId: event
+            });
+            func();
+        }
+
     }
 
     _onLoginPasswordChange(event) {
@@ -164,8 +192,8 @@ export default class Add extends Component {
                     this.setState({
                         noPasswordBicycle: res.body
                     });
+                    alert('删除:' + event);
                 });
-            alert(event);
         };
     }
 
@@ -190,7 +218,7 @@ export default class Add extends Component {
                 password: this.state.password
             })
             .end((err, res) => {
-                alert(res.text)
+                alert(res.text);
             });
     }
 }

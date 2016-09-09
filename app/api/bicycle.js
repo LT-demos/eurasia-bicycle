@@ -7,8 +7,8 @@ router.post('/', function (req, res, next) {
     const bicycleId = req.body.bicycleId;
     const password = req.body.password;
 
-
-    if (_.isEmpty(bicycleId)) {
+    if (_.isEmpty(bicycleId.toString())) {
+        if (err) return next(err);
         return res.status(400).send('你没有输入车牌号');
     }
 
