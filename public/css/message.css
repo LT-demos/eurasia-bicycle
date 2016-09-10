@@ -6,24 +6,33 @@
     margin-bottom: 10px;
     padding-top: 8px;
 }
-.panel .panel-heading{
-    padding:0px 0px 0px 10px
+
+.panel .panel-heading {
+    padding: 0px 0px 0px 10px
 }
-.panel .panel-body{
+
+.panel .panel-body {
     height: 80px;
     -webkit-column-span: 50;
     column-span: 50;
 }
+
 .message-heading {
     height: 20px;
 }
-.panel .panel-footer{
+
+.panel .panel-footer {
     height: 35px;
     color: cornflowerblue;
     padding-top: 8px;
 }
 
 .heading-name {
-    font-size: 8px;
+    padding-right: 10px;
+    font-size: 14px;
+    float: right;
 }
-p { word-wrap:break-word; }
+
+p {
+    word-wrap: break-word;
+}
