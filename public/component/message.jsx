@@ -34,8 +34,18 @@ export default class Message extends Component {
             });
     }
 
+    //同步点赞
+    componentWillMount(){
+        request.get('/api/message')
+            .end((err, res) => {
+                this.setState({
+                    messages: res.body.reverse()
+                });
+
+            });
+    }
+
     render() {
-        var number = 0;
         return <div className="container-fluid">
             <div className="page-header">
                 <h4>留言板</h4>
@@ -96,10 +106,11 @@ export default class Message extends Component {
 
     _Vote(event) {
         return () => {
-            alert(event);
             request.post('/api/message/vote')
                 .send({id:event})
-                .end();
+                .end((err,res) => {
+
+                });
         };
     }
 

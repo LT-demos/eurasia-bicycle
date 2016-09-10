@@ -38,8 +38,9 @@ router.post('/vote', (req, res, next) => {
     console.log(id);
     Message.findOne({id: id}, (err, data) => {
         const oldVotes = data.votes;
+        console.log(oldVotes + "old");
         const newVotes = ++data.votes;
-        Message.update({votes: oldVotes}, {votes: newVotes}, () => {
+        Message.update({id: id}, {votes: newVotes}, () => {
             console.log(newVotes);
             res.status(200).send('vote success');
         });
