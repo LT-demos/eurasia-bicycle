@@ -35,7 +35,7 @@ export default class Message extends Component {
     }
 
     //同步点赞
-    componentWillMount(){
+    componentWillMount() {
         request.get('/api/message')
             .end((err, res) => {
                 this.setState({
@@ -107,10 +107,8 @@ export default class Message extends Component {
     _Vote(event) {
         return () => {
             request.post('/api/message/vote')
-                .send({id:event})
-                .end((err,res) => {
-
-                });
+                .send({id: event})
+                .end();
         };
     }
 
