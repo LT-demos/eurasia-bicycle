@@ -82,7 +82,7 @@ export default class Message extends Component {
                         <hr/>
                         <div className="panel panel-primary">
                             <div className="heading panel-heading  message-heading">
-                                {--number}楼
+                                {number--}楼
                                 <span className="heading-name">From:{message.name}</span>
                             </div>
                             <div className="panel-body">
