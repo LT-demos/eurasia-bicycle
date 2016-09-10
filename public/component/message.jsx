@@ -18,7 +18,7 @@ export default class Message extends Component {
         request.get('/api/message')
             .end((err, res) => {
                 this.setState({
-                    messages: res.body
+                    messages: res.body.reverse()
                 });
 
             });
@@ -28,7 +28,7 @@ export default class Message extends Component {
         request.get('/api/message')
             .end((err, res) => {
                 this.setState({
-                    messages: res.body
+                    messages: res.body.reverse()
                 });
 
             });
@@ -62,7 +62,7 @@ export default class Message extends Component {
             </div>
             <div>
                 {
-                    this.state.messages.reverse().map(message =><div>
+                    this.state.messages.map(message =><div>
                         <hr/>
                         <div className="panel panel-primary">
                             <div className="heading panel-heading  message-heading">
@@ -73,6 +73,12 @@ export default class Message extends Component {
                                     {message.message}
                                 </p>
                             </div>
+                            <div className="panel-footer">
+
+                                <div className="pull-right">
+                                    <span className="glyphicon glyphicon-thumbs-up" onClick={this._Vote.bind(this)}/>
+                                </div>
+                            </div>
                         </div>
 
                     </div>)
@@ -80,12 +86,11 @@ export default class Message extends Component {
                 }
 
             </div>
-            <div>
-                {
-
-                }
-            </div>
         </div>;
+    }
+
+    _Vote(event) {
+
     }
 
     _onNameChange(event) {

@@ -10,14 +10,18 @@
     padding:0px 0px 0px 10px
 }
 .panel .panel-body{
-    height: 100px;
+    height: 80px;
     -webkit-column-span: 50;
     column-span: 50;
 }
 .message-heading {
     height: 20px;
 }
-
+.panel .panel-footer{
+    height: 35px;
+    color: cornflowerblue;
+    padding-top: 8px;
+}
 
 .heading-name {
     font-size: 8px;
