@@ -35,6 +35,7 @@ export default class Message extends Component {
     }
 
     render() {
+        var number = 0;
         return <div className="container-fluid">
             <div className="page-header">
                 <h4>留言板</h4>
@@ -64,10 +65,11 @@ export default class Message extends Component {
             <div>
                 {
                     this.state.messages.map(message =><div>
+
                         <hr/>
                         <div className="panel panel-primary">
                             <div className="heading panel-heading  message-heading">
-                                {message.id}楼
+                                {--this.state.messages.length}楼
                                 <span className="heading-name">From:{message.name}</span>
                             </div>
                             <div className="panel-body">
