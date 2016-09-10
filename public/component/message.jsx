@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {hashHistory} from 'react-router'
 import request from 'superagent';
+import _ from 'lodash';
+
 
 require("../css/message.css");
 
@@ -10,38 +12,57 @@ export default class Message extends Component {
         this.state = {
             name: '',
             message: '',
-            messages: []
+            messages: [],
+            page: 1,
+            totalPage: ''
         };
     }
 
     componentDidMount() {
-        request.get('/api/message')
+        request.get('/api/message/totalPage')
             .end((err, res) => {
                 this.setState({
-                    messages: res.body.reverse()
+                    page: res.body.totalPage,
+                    totalPage: res.body.totalPage
                 });
+                request.get('/api/message')
 
+                    .query({page: this.state.totalPage})
+                    .end((err, res) => {
+                        this.setState({
+                            messages: res.body.messages.reverse(),
+                            totalPage: res.body.totalPage
+                        });
+
+                        // alert(this.state.totalPage);
+                        console.log(res.body);
+                    });
             });
+
+
         request.get('/api/message/vote')
             .end();
     }
 
-    componentDidUpdate() {
-        request.get('/api/message')
-            .end((err, res) => {
-                this.setState({
-                    messages: res.body.reverse()
-                });
-
-            });
-    }
+    // componentDidUpdate() {
+    //     request.get('/api/message')
+    //         .query({page: this.state.page})
+    //         .end((err, res) => {
+    //             this.setState({
+    //                 messages: res.body.reverse()
+    //             });
+    //
+    //         });
+    // }
 
     //同步点赞
     componentWillMount() {
         request.get('/api/message')
+            .query({page: this.state.page})
             .end((err, res) => {
                 this.setState({
-                    messages: res.body.reverse()
+                    messages: res.body.messages.reverse(),
+                    totalPage: res.body.totalPage
                 });
 
             });
@@ -49,6 +70,8 @@ export default class Message extends Component {
 
     render() {
         var number = this.state.messages.length;
+        var pageCount = 0;
+        var pageNum = 0;
         return <div className="container-fluid">
             <div className="page-header">
                 <h4>留言板</h4>
@@ -78,11 +101,10 @@ export default class Message extends Component {
             <div>
                 {
                     this.state.messages.map(message =><div>
-
                         <hr/>
                         <div className="panel panel-primary">
                             <div className="heading panel-heading  message-heading">
-                                {number--}楼
+                                {message.id}楼
                                 <span className="heading-name">From:{message.name}</span>
                             </div>
                             <div className="panel-body">
@@ -92,8 +114,8 @@ export default class Message extends Component {
                             </div>
                             <div className="panel-footer">
 
-                                <div className="pull-right">
-                                    <span className="glyphicon glyphicon-thumbs-up" onClick={this._Vote(message.id)}/>
+                                <div className="pull-right" onClick={this._Vote(message.id)}>
+                                    <span className="glyphicon glyphicon-thumbs-up"/>
                                     <span>{message.votes}</span>
                                 </div>
                             </div>
@@ -102,9 +124,55 @@ export default class Message extends Component {
                     </div>)
 
                 }
+                <nav>
+                    <ul className="pagination">
+                        <li><a >&laquo;</a></li>
+                        {
+
+                        }
+                        <li className={this.state.page === this.state.totalPage ? 'active' : ''}><a
+                            onClick={this._pageChange(this.state.totalPage)}>1</a>
+                        </li>
+                        <li className={this.state.page === this.state.totalPage - 1 ? 'active' : ''}><a
+                            onClick={this._pageChange(this.state.totalPage - 1)}>2</a>
+                        </li>
+                        <li className={this.state.page === this.state.totalPage - 2 ? 'active' : ''}><a
+                            onClick={this._pageChange(this.state.totalPage - 2)}>3</a>
+                        </li>
+                        <li className={this.state.page === this.state.totalPage - 3 ? 'active' : ''}><a
+                            onClick={this._pageChange(this.state.totalPage - 3)}>4</a>
+                        </li>
+                        <li className={this.state.page === this.state.totalPage - 4 ? 'active' : ''}><a
+                            onClick={this._pageChange(this.state.totalPage - 4)}>5</a>
+                        </li>
+                        <li className={this.state.page === this.state.totalPage - 5 ? 'active' : ''}><a
+                            onClick={this._pageChange(this.state.totalPage - 5)}>6</a>
+
+                        </li>
+                        <li><a >&raquo;</a></li>
+                    </ul>
+                </nav>
 
             </div>
         </div>;
+    }
+
+    _pageChange(event) {
+        return () => {
+            this.setState({
+                page: event
+            });
+            request.get('/api/message')
+                .query({page: event})
+                .end((err, res) => {
+                    this.setState({
+                        messages: res.body.messages.reverse(),
+                        totalPage: res.body.totalPage
+                    });
+
+                });
+        };
+
     }
 
     _Vote(event) {
@@ -112,6 +180,15 @@ export default class Message extends Component {
             request.post('/api/message/vote')
                 .send({id: event})
                 .end();
+            request.get('/api/message')
+                .query({page: this.state.page})
+                .end((err, res) => {
+                    this.setState({
+                        messages: res.body.messages.reverse(),
+                        totalPage: res.body.totalPage
+                    });
+
+                });
         };
     }
 
@@ -143,6 +220,15 @@ export default class Message extends Component {
             })
             .end((err, res) => {
                 alert(res.text)
+            });
+        request.get('/api/message')
+            .query({page: this.state.page})
+            .end((err, res) => {
+                this.setState({
+                    messages: res.body.messages.reverse(),
+                    totalPage: res.body.totalPage
+                });
+
             });
 
     }

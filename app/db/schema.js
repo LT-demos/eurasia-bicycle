@@ -25,7 +25,9 @@ const messageSchema = new Schema({
     id: Number,
     name: String,
     message: String,
-    votes: Number
+    votes: Number,
+    page:Number,
+    totalPage:Number
 });
 
 const Bicycle = mongoose.model('Bicycle', bicycleSchema);

@@ -14,12 +14,17 @@ router.post('/', (req, res, next) => {
     else {
         Message.find({}, (err, data) => {
             if (err) return next(err);
+            const dataLength = data.length;
+            const page = Math.floor(dataLength / 10);
+            console.log("page:" + Math.floor(page));
+
 
             var messageData = new Message({
                 id: data.length + 1,
                 name: name,
                 message: message,
-                votes: 0
+                votes: 0,
+                page: page + 1
             });
             messageData.save((err) => {
                 if (err) return next(err);
@@ -33,11 +38,29 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-    Message.find({}, (err, messages) => {
-        if (err) return next(err);
+    console.log(req.query.page + '====');
+    const page = req.query.page;
+    Message.find({}, (err, data) => {
+        const totalPage = Math.ceil(data.length / 10);
 
-        res.send(messages);
+        Message.find({page: page}, (err, messages) => {
+            if (err) return next(err);
+
+            // res.send(messages);
+            res.send({messages: messages, totalPage: totalPage});
+        });
     });
+
+});
+
+router.get('/totalPage', (req, res, next) => {
+    console.log('======');
+    Message.find({}, (err, data) => {
+        const totalPage = Math.ceil(data.length / 10);
+        console.log("totalPage:" + totalPage);
+        res.send({totalPage: totalPage});
+    });
+
 });
 
 router.post('/vote', (req, res, next) => {
@@ -55,7 +78,7 @@ router.post('/vote', (req, res, next) => {
     });
 });
 
-router.get('/vote',(req,res,next) => {
+router.get('/vote', (req, res, next) => {
     Message.find({}, (err, messages) => {
         if (err) return next(err);
 
