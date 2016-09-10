@@ -24,7 +24,11 @@ router.post('/', function (req, res, next) {
 
                 bicycle.save(function (err) {
                     if (err) return next(err);
-                    res.status(201).send('add success');
+                    NoPasswordBicycle.remove({noPasswordBicycleId: bicycleId}, (err) => {
+                        NoPasswordBicycle.find({}, (err, data) => {
+                            res.status(201).send('add success');
+                        });
+                    });
                 });
 
 

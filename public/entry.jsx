@@ -1,4 +1,5 @@
 import App from './app.jsx';
+import Message from './component/message.jsx';
 import Add from './component/add.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -11,6 +12,7 @@ const router = <Router history={hashHistory}>
     <Route path="/" component={App}>
     </Route>
     <Route path="/add" component={Add}/>
+    <Route path="/message" component={Message}/>
 </Router>;
 
 ReactDOM.render(
