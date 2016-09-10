@@ -62,7 +62,7 @@ export default class Message extends Component {
             </div>
             <div>
                 {
-                    this.state.messages.map(message =><div>
+                    this.state.messages.reverse().map(message =><div>
                         <hr/>
                         <div className="panel panel-primary">
                             <div className="heading panel-heading  message-heading">
@@ -76,6 +76,12 @@ export default class Message extends Component {
                         </div>
 
                     </div>)
+
+                }
+
+            </div>
+            <div>
+                {
 
                 }
             </div>
