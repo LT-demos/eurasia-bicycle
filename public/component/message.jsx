@@ -80,7 +80,8 @@ export default class Message extends Component {
                             <div className="panel-footer">
 
                                 <div className="pull-right">
-                                    <span className="glyphicon glyphicon-thumbs-up" onClick={this._Vote.bind(this)}/>
+                                    <span className="glyphicon glyphicon-thumbs-up" onClick={this._Vote(message.id)}/>
+                                    <span>{message.votes}</span>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +95,12 @@ export default class Message extends Component {
     }
 
     _Vote(event) {
-
+        return () => {
+            alert(event);
+            request.post('/api/message/vote')
+                .send({id:event})
+                .end();
+        };
     }
 
     _onNameChange(event) {

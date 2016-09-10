@@ -32,7 +32,18 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', () => {
+router.post('/vote', (req, res, next) => {
 
+    const id = req.body.id;
+    console.log(id);
+    Message.findOne({id: id}, (err, data) => {
+        const oldVotes = data.votes;
+        const newVotes = ++data.votes;
+        Message.update({votes: oldVotes}, {votes: newVotes}, () => {
+            console.log(newVotes);
+            res.status(200).send('vote success');
+        });
+    });
 });
+
 export default router;
