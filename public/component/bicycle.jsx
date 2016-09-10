@@ -65,9 +65,10 @@ export default class Bicycle extends Component {
                 </label>
                 <div className="pull-right userViewedCount">
                     阅读:{this.state.userViewedCount}&nbsp;&nbsp;&nbsp;
-                    <a className="vote" onClick={this._vote.bind(this)}>&nbsp;<span
+                    <span className="vote" onClick={this._vote.bind(this)}>
+                        &nbsp;<span
                         className="glyphicon glyphicon-thumbs-up"/><span>{this.state.voteCount}</span>
-                    </a>
+                    </span>
                 </div>
                 <div id="div1" className="result"></div>
             </div>
