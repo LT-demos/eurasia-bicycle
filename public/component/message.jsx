@@ -47,12 +47,13 @@ export default class Message extends Component {
                             <label className="name" maxLength="10">昵称:</label>&nbsp;&nbsp;
                         </div>
                         <div className="pull-left nameInput">
-                            <input type="text" className="form-control" required placeholder="请输入昵称"
+                            <input type="text" className="form-control" required="required" placeholder="请输入昵称"
                                    value={this.state.name}
                                    onChange={this._onNameChange.bind(this)}/>
                         </div>
                     </div>
                     <textarea className="form-control" rows="3" maxLength="100" wrap="hard" placeholder="请输入内容"
+                              required="required"
                               value={this.state.message}
                               onChange={this._onMessageChange.bind(this)}/>
 
@@ -121,8 +122,8 @@ export default class Message extends Component {
                 message: this.state.message
             })
             .end((err, res) => {
+                alert(res.text)
             });
 
-        alert(this.state.message + this.state.name);
     }
 }
