@@ -1,0 +1,25 @@
+.nameInput {
+    width: 100px;
+}
+
+.name {
+    margin-bottom: 10px;
+    padding-top: 8px;
+}
+.panel .panel-heading{
+    padding:0px 0px 0px 10px
+}
+.panel .panel-body{
+    height: 100px;
+    -webkit-column-span: 50;
+    column-span: 50;
+}
+.message-heading {
+    height: 20px;
+}
+
+
+.heading-name {
+    font-size: 8px;
+}
+p { word-wrap:break-word; }

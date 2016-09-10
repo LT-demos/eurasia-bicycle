@@ -211,7 +211,7 @@ export default class Add extends Component {
 
 
     _onSubmit(event) {
-        event.preventDefault();
+            event.preventDefault();
         request.post('/api/bicycle')
             .send({
                 bicycleId: this.state.bicycleId,

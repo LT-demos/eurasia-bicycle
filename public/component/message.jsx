@@ -2,36 +2,115 @@ import React, {Component} from "react";
 import {hashHistory} from 'react-router'
 import request from 'superagent';
 
+require("../css/message.css");
+
 export default class Message extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            message: '',
+            messages: []
+        };
+    }
+
+    componentDidMount() {
+        request.get('/api/message')
+            .end((err, res) => {
+                this.setState({
+                    messages: res.body
+                });
+
+            });
+    }
+
+    componentDidUpdate() {
+        request.get('/api/message')
+            .end((err, res) => {
+                this.setState({
+                    messages: res.body
+                });
+
+            });
+    }
+
     render() {
         return <div className="container-fluid">
             <div className="page-header">
-                <h1>留言板</h1>
+                <h4>留言板</h4>
             </div>
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">
-                点击留言
-            </button>
+            <div>
+                <form onSubmit={this._submitMessage.bind(this)}>
 
-            <div className="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal"><span
-                                aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
-                            <h4 className="modal-title">Modal title</h4>
+                    <div>
+                        <div className="pull-left">
+                            <label className="name" maxLength="10">昵称:</label>&nbsp;&nbsp;
                         </div>
-                        <div className="modal-body">
-                            <p>One fine body&hellip;</p>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
+                        <div className="pull-left nameInput">
+                            <input type="text" className="form-control" required placeholder="请输入昵称"
+                                   value={this.state.name}
+                                   onChange={this._onNameChange.bind(this)}/>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <textarea className="form-control" rows="3" maxLength="100" wrap="hard" placeholder="请输入内容"
+                              value={this.state.message}
+                              onChange={this._onMessageChange.bind(this)}/>
 
+                    <button type="submit" className="btn btn-primary pull-right">提交</button>
+                </form>
+
+            </div>
+            <div>
+                {
+                    this.state.messages.map(message =><div>
+                        <hr/>
+                        <div className="panel panel-primary">
+                            <div className="heading panel-heading  message-heading">
+                                <span className="heading-name">From:{message.name}</span>
+                            </div>
+                            <div className="panel-body">
+                                <p>
+                                    {message.message}
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>)
+
+                }
+            </div>
         </div>;
+    }
+
+    _onNameChange(event) {
+        this.setState({
+            name: event.target.value
+        });
+        if (event.target.value.length === 10) {
+            alert("超出字数限制,只能输入10个字");
+        }
+    }
+
+    _onMessageChange(event) {
+        this.setState({
+            message: event.target.value
+        });
+        if (event.target.value.length === 100) {
+            alert("超出10字数限制,只能输入100个字");
+        }
+    }
+
+
+    _submitMessage() {
+        event.preventDefault();
+        request.post('/api/message')
+            .send({
+                name: this.state.name,
+                message: this.state.message
+            })
+            .end((err, res) => {
+            });
+
+        alert(this.state.message + this.state.name);
     }
 }
