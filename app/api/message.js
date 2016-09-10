@@ -35,13 +35,10 @@ router.get('/', (req, res, next) => {
 router.post('/vote', (req, res, next) => {
 
     const id = req.body.id;
-    console.log(id);
     Message.findOne({id: id}, (err, data) => {
         const oldVotes = data.votes;
-        console.log(oldVotes + "old");
-        const newVotes = ++data.votes;
+        const newVotes = oldVotes+1;
         Message.update({id: id}, {votes: newVotes}, () => {
-            console.log(newVotes);
             res.status(200).send('vote success');
         });
     });
