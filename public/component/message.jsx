@@ -22,6 +22,8 @@ export default class Message extends Component {
                 });
 
             });
+        request.get('/api/message/vote')
+            .end();
     }
 
     componentDidUpdate() {
@@ -46,6 +48,7 @@ export default class Message extends Component {
     }
 
     render() {
+        var number = this.state.messages.length;
         return <div className="container-fluid">
             <div className="page-header">
                 <h4>留言板</h4>
@@ -79,7 +82,7 @@ export default class Message extends Component {
                         <hr/>
                         <div className="panel panel-primary">
                             <div className="heading panel-heading  message-heading">
-                                {--this.state.messages.length}楼
+                                {--number}楼
                                 <span className="heading-name">From:{message.name}</span>
                             </div>
                             <div className="panel-body">

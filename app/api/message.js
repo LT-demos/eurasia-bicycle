@@ -55,4 +55,11 @@ router.post('/vote', (req, res, next) => {
     });
 });
 
+router.get('/vote',(req,res,next) => {
+    Message.find({}, (err, messages) => {
+        if (err) return next(err);
+
+        res.send(messages);
+    });
+});
 export default router;
