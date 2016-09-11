@@ -133,8 +133,9 @@ export default class Message extends Component {
                         onClick={this._pageChange(this.state.totalPage - this.state.pageNum - 4)}>{this.state.pageNum + 5}</a>
 
                     </li>
-                    <li className={this.state.pageNum == this.state.totalPage ? 'hidden' : ''}><a
-                        onClick={this._onPageNumNextChange.bind(this)}>&raquo;</a></li>
+                    <li className={this.state.pageNum == this.state.totalPage || this.state.pageNum > this.state.totalPage ? 'hidden' : ''}>
+                        <a
+                            onClick={this._onPageNumNextChange.bind(this)}>&raquo;</a></li>
                 </ul>
             </nav>
             <div>
@@ -193,8 +194,9 @@ export default class Message extends Component {
                                 onClick={this._pageChange(this.state.totalPage - this.state.pageNum - 4)}>{this.state.pageNum + 5}</a>
 
                         </li>
-                        <li className={this.state.pageNum == this.state.totalPage ? 'hidden' : ''}><a
-                            onClick={this._onPageNumNextChange.bind(this)}>&raquo;</a></li>
+                        <li className={this.state.pageNum == this.state.totalPage || this.state.pageNum >= this.state.totalPage ? 'hidden' : ''}>
+                            <a
+                                onClick={this._onPageNumNextChange.bind(this)}>&raquo;</a></li>
                     </ul>
                 </nav>
 
