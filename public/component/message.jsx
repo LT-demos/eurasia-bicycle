@@ -27,15 +27,13 @@ export default class Message extends Component {
                 });
                 request.get('/api/message')
 
-                    .query({page: this.state.totalPage})
+                    .query({page: this.state.page})
                     .end((err, res) => {
                         this.setState({
                             messages: res.body.messages.reverse(),
                             totalPage: res.body.totalPage
                         });
 
-                        // alert(this.state.totalPage);
-                        console.log(res.body);
                     });
 
             });
@@ -238,6 +236,7 @@ export default class Message extends Component {
                 });
 
             });
+
 
     }
 }
