@@ -12,7 +12,7 @@ export default class Index extends React.Component {
                         <Bicycle/>
                     </div>
                     <div>
-                        <Message/>
+                        {/*<Message/>*/}
                     </div>
                 </div>
                 <div>
