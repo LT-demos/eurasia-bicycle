@@ -25,35 +25,47 @@ export default class Message extends Component {
                     page: res.body.totalPage,
                     totalPage: res.body.totalPage
                 });
-                request.get('/api/message')
-
-                    .query({page: this.state.totalPage})
-                    .end((err, res) => {
-                        this.setState({
-                            messages: res.body.messages.reverse(),
-                            totalPage: res.body.totalPage
-                        });
-
-                        // alert(this.state.totalPage);
-                        console.log(res.body);
-                    });
+                // request.get('/api/message')
+                //
+                //     .query({page: this.state.totalPage})
+                //     .end((err, res) => {
+                //         this.setState({
+                //             messages: res.body.messages.reverse(),
+                //             totalPage: res.body.totalPage
+                //         });
+                //
+                //         // alert(this.state.totalPage);
+                //         console.log(res.body);
+                //     });
             });
 
 
-        request.get('/api/message/vote')
-            .end();
+        // request.get('/api/message/vote')
+        //     .end();
     }
 
-    // componentDidUpdate() {
-    //     request.get('/api/message')
-    //         .query({page: this.state.page})
-    //         .end((err, res) => {
-    //             this.setState({
-    //                 messages: res.body.reverse()
-    //             });
-    //
-    //         });
-    // }
+    componentDidUpdate() {
+        // request.get('/api/message')
+        //     .query({page: this.state.page})
+        //     .end((err, res) => {
+        //         this.setState({
+        //             messages: res.body.reverse()
+        //         });
+        //
+        //     });
+        request.get('/api/message')
+
+            .query({page: this.state.totalPage})
+            .end((err, res) => {
+                this.setState({
+                    messages: res.body.messages.reverse(),
+                    totalPage: res.body.totalPage
+                });
+
+                // alert(this.state.totalPage);
+                console.log(res.body);
+            });
+    }
 
     //同步点赞
     componentWillMount() {
@@ -69,9 +81,6 @@ export default class Message extends Component {
     }
 
     render() {
-        var number = this.state.messages.length;
-        var pageCount = 0;
-        var pageNum = 0;
         return <div className="container-fluid">
             <div className="page-header">
                 <h4>留言板</h4>
