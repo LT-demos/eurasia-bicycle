@@ -202,7 +202,7 @@ export default class Message extends Component {
         this.setState({
             name: event.target.value
         });
-        if (event.target.value.length === 10) {
+        if (event.target.value.length === 10||event.target.value.length>10) {
             alert("超出字数限制,只能输入10个字");
         }
     }
@@ -211,7 +211,7 @@ export default class Message extends Component {
         this.setState({
             message: event.target.value
         });
-        if (event.target.value.length === 100) {
+        if (event.target.value.length === 100||event.target.value.length >100) {
             alert("超出10字数限制,只能输入100个字");
         }
     }

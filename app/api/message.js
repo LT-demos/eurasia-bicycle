@@ -10,6 +10,9 @@ router.post('/', (req, res, next) => {
     if (_.isEmpty(name.toString()) || _.isEmpty(message.toString())) {
         res.status(400).send('昵称或内容不能为空');
     }
+    else if (name.length > 10 || message.length > 100) {
+        res.status(400).send('用户名或内容太长啦!');
+    }
 
     else {
         Message.find({}, (err, data) => {
