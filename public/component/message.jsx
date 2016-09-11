@@ -127,9 +127,6 @@ export default class Message extends Component {
                 <nav>
                     <ul className="pagination">
                         <li><a >&laquo;</a></li>
-                        {
-
-                        }
                         <li className={this.state.page === this.state.totalPage ? 'active' : ''}><a
                             onClick={this._pageChange(this.state.totalPage)}>1</a>
                         </li>
