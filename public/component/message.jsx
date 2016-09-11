@@ -217,7 +217,7 @@ export default class Message extends Component {
     }
 
 
-    _submitMessage() {
+    _submitMessage(event) {
         event.preventDefault();
         request.post('/api/message')
             .send({
