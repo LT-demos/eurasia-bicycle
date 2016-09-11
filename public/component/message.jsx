@@ -27,7 +27,7 @@ export default class Message extends Component {
                 });
                 request.get('/api/message')
 
-                    .query({page: this.state.page})
+                    .query({page: this.state.totalPage})
                     .end((err, res) => {
                         this.setState({
                             messages: res.body.messages.reverse(),
@@ -136,8 +136,8 @@ export default class Message extends Component {
                 <nav>
                     <ul className="pagination">
                         <li><a >&laquo;</a></li>
-                        <li className={this.state.page === this.state.totalPage ? 'active' : ''}><a
-                            onClick={this._pageChange(this.state.totalPage)}>1</a>
+                        <li  className={this.state.page === this.state.totalPage ? 'active' : ''}><a
+                            ref="ind" onClick={this._pageChange(this.state.totalPage)}>1</a>
                         </li>
                         <li className={this.state.page === this.state.totalPage - 1 ? 'active' : ''}><a
                             onClick={this._pageChange(this.state.totalPage - 1)}>2</a>
@@ -226,16 +226,26 @@ export default class Message extends Component {
             })
             .end((err, res) => {
                 alert(res.text)
-            });
-        request.get('/api/message')
-            .query({page: this.state.page})
-            .end((err, res) => {
-                this.setState({
-                    messages: res.body.messages.reverse(),
-                    totalPage: res.body.totalPage
-                });
+                request.get('/api/message')
+                    .query({page: this.state.totalPage})
+                    .end((err, res) => {
+                        this.setState({
+                            messages: res.body.messages.reverse(),
+                            totalPage: res.body.totalPage
+                        });
+                        this.refs.ind.click();
 
+                    });
             });
+        // request.get('/api/message')
+        //     .query({page: this.state.page})
+        //     .end((err, res) => {
+        //         this.setState({
+        //             messages: res.body.messages.reverse(),
+        //             totalPage: res.body.totalPage
+        //         });
+        //
+        //     });
 
 
     }
