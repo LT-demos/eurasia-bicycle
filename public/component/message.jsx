@@ -13,8 +13,10 @@ export default class Message extends Component {
             name: '',
             message: '',
             messages: [],
-            page: 1,
-            totalPage: ''
+            page: '',
+            totalPage: '',
+            pageNum: 1
+
         };
     }
 
@@ -39,8 +41,6 @@ export default class Message extends Component {
             });
 
 
-        // request.get('/api/message/vote')
-        //     .end();
     }
 
     // componentDidUpdate() {
@@ -78,6 +78,7 @@ export default class Message extends Component {
 
             });
 
+
     }
 
     render() {
@@ -107,6 +108,35 @@ export default class Message extends Component {
                 </form>
 
             </div>
+            <nav>
+                <ul className="pagination">
+
+                    <li className={this.state.pageNum < 6 ? 'hidden' : ''}><a
+                        onClick={this._onPageNumLastChange.bind(this)}>&raquo;</a></li>
+                    <li className={this.state.page === this.state.totalPage - this.state.pageNum + 1 ? 'active' : ''}><a
+                        ref="ind"
+                        onClick={this._pageChange(this.state.totalPage - this.state.pageNum + 1)}>{this.state.pageNum}</a>
+                    </li>
+                    <li className={this.state.page === this.state.totalPage - this.state.pageNum ? 'active' : ''}><a
+                        onClick={this._pageChange(this.state.totalPage - this.state.pageNum)}>{this.state.pageNum + 1}</a>
+                    </li>
+                    <li className={this.state.page === this.state.totalPage - this.state.pageNum - 1 ? 'active' : ''}><a
+                        onClick={this._pageChange(this.state.totalPage - this.state.pageNum - 1)}>{this.state.pageNum + 2}</a>
+                    </li>
+                    <li className={this.state.page === this.state.totalPage - this.state.pageNum - 2 ? 'active' : ''}><a
+                        onClick={this._pageChange(this.state.totalPage - this.state.pageNum - 2)}>{this.state.pageNum + 3}</a>
+                    </li>
+                    <li className={this.state.page === this.state.totalPage - this.state.pageNum - 3 ? 'active' : ''}><a
+                        onClick={this._pageChange(this.state.totalPage - this.state.pageNum - 3)}>{this.state.pageNum + 4}</a>
+                    </li>
+                    <li className={this.state.page === this.state.totalPage - this.state.pageNum - 4 ? 'active' : ''}><a
+                        onClick={this._pageChange(this.state.totalPage - this.state.pageNum - 4)}>{this.state.pageNum + 5}</a>
+
+                    </li>
+                    <li className={this.state.pageNum == this.state.totalPage ? 'hidden' : ''}><a
+                        onClick={this._onPageNumNextChange.bind(this)}>&raquo;</a></li>
+                </ul>
+            </nav>
             <div>
                 {
                     this.state.messages.map(message =><div>
@@ -135,33 +165,60 @@ export default class Message extends Component {
                 }
                 <nav>
                     <ul className="pagination">
-                        <li><a >&laquo;</a></li>
-                        <li  className={this.state.page === this.state.totalPage ? 'active' : ''}><a
-                            ref="ind" onClick={this._pageChange(this.state.totalPage)}>1</a>
+
+                        <li className={this.state.pageNum < 6 ? 'hidden' : ''}><a
+                            onClick={this._onPageNumLastChange.bind(this)}>&raquo;</a></li>
+                        <li className={this.state.page === this.state.totalPage - this.state.pageNum + 1 ? 'active' : ''}>
+                            <a
+                                ref="ind"
+                                onClick={this._pageChange(this.state.totalPage - this.state.pageNum + 1)}>{this.state.pageNum}</a>
                         </li>
-                        <li className={this.state.page === this.state.totalPage - 1 ? 'active' : ''}><a
-                            onClick={this._pageChange(this.state.totalPage - 1)}>2</a>
+                        <li className={this.state.page === this.state.totalPage - this.state.pageNum ? 'active' : ''}><a
+                            onClick={this._pageChange(this.state.totalPage - this.state.pageNum)}>{this.state.pageNum + 1}</a>
                         </li>
-                        <li className={this.state.page === this.state.totalPage - 2 ? 'active' : ''}><a
-                            onClick={this._pageChange(this.state.totalPage - 2)}>3</a>
+                        <li className={this.state.page === this.state.totalPage - this.state.pageNum - 1 ? 'active' : ''}>
+                            <a
+                                onClick={this._pageChange(this.state.totalPage - this.state.pageNum - 1)}>{this.state.pageNum + 2}</a>
                         </li>
-                        <li className={this.state.page === this.state.totalPage - 3 ? 'active' : ''}><a
-                            onClick={this._pageChange(this.state.totalPage - 3)}>4</a>
+                        <li className={this.state.page === this.state.totalPage - this.state.pageNum - 2 ? 'active' : ''}>
+                            <a
+                                onClick={this._pageChange(this.state.totalPage - this.state.pageNum - 2)}>{this.state.pageNum + 3}</a>
                         </li>
-                        <li className={this.state.page === this.state.totalPage - 4 ? 'active' : ''}><a
-                            onClick={this._pageChange(this.state.totalPage - 4)}>5</a>
+                        <li className={this.state.page === this.state.totalPage - this.state.pageNum - 3 ? 'active' : ''}>
+                            <a
+                                onClick={this._pageChange(this.state.totalPage - this.state.pageNum - 3)}>{this.state.pageNum + 4}</a>
                         </li>
-                        <li className={this.state.page === this.state.totalPage - 5 ? 'active' : ''}><a
-                            onClick={this._pageChange(this.state.totalPage - 5)}>6</a>
+                        <li className={this.state.page === this.state.totalPage - this.state.pageNum - 4 ? 'active' : ''}>
+                            <a
+                                onClick={this._pageChange(this.state.totalPage - this.state.pageNum - 4)}>{this.state.pageNum + 5}</a>
 
                         </li>
-                        <li><a >&raquo;</a></li>
+                        <li className={this.state.pageNum == this.state.totalPage ? 'hidden' : ''}><a
+                            onClick={this._onPageNumNextChange.bind(this)}>&raquo;</a></li>
                     </ul>
                 </nav>
 
             </div>
         </div>;
     }
+
+    _onPageNumNextChange(event) {
+        this.setState({
+            pageNum: this.state.pageNum + 6,
+            page: (this.state.totalPage - this.state.pageNum + 1)//???没用
+        });
+    }
+
+    _onPageNumLastChange(event) {
+        this.setState({
+            pageNum: this.state.pageNum - 6,
+            totalPage: (this.state.totalPage + 6),
+            page: (this.state.page + 6)
+        });
+        this.refs.ind.click();
+
+    }
+
 
     _pageChange(event) {
         return () => {
@@ -202,7 +259,7 @@ export default class Message extends Component {
         this.setState({
             name: event.target.value
         });
-        if (event.target.value.length === 10||event.target.value.length>10) {
+        if (event.target.value.length === 10 || event.target.value.length > 10) {
             alert("超出字数限制,只能输入10个字");
         }
     }
@@ -211,7 +268,7 @@ export default class Message extends Component {
         this.setState({
             message: event.target.value
         });
-        if (event.target.value.length === 100||event.target.value.length >100) {
+        if (event.target.value.length === 100 || event.target.value.length > 100) {
             alert("超出10字数限制,只能输入100个字");
         }
     }
@@ -237,15 +294,6 @@ export default class Message extends Component {
 
                     });
             });
-        // request.get('/api/message')
-        //     .query({page: this.state.page})
-        //     .end((err, res) => {
-        //         this.setState({
-        //             messages: res.body.messages.reverse(),
-        //             totalPage: res.body.totalPage
-        //         });
-        //
-        //     });
 
 
     }
