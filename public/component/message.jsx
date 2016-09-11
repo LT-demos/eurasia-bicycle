@@ -25,18 +25,19 @@ export default class Message extends Component {
                     page: res.body.totalPage,
                     totalPage: res.body.totalPage
                 });
-                // request.get('/api/message')
-                //
-                //     .query({page: this.state.totalPage})
-                //     .end((err, res) => {
-                //         this.setState({
-                //             messages: res.body.messages.reverse(),
-                //             totalPage: res.body.totalPage
-                //         });
-                //
-                //         // alert(this.state.totalPage);
-                //         console.log(res.body);
-                //     });
+                request.get('/api/message')
+
+                    .query({page: this.state.totalPage})
+                    .end((err, res) => {
+                        this.setState({
+                            messages: res.body.messages.reverse(),
+                            totalPage: res.body.totalPage
+                        });
+
+                        // alert(this.state.totalPage);
+                        console.log(res.body);
+                    });
+
             });
 
 
@@ -44,28 +45,28 @@ export default class Message extends Component {
         //     .end();
     }
 
-    componentDidUpdate() {
-        // request.get('/api/message')
-        //     .query({page: this.state.page})
-        //     .end((err, res) => {
-        //         this.setState({
-        //             messages: res.body.reverse()
-        //         });
-        //
-        //     });
-        request.get('/api/message')
-
-            .query({page: this.state.totalPage})
-            .end((err, res) => {
-                this.setState({
-                    messages: res.body.messages.reverse(),
-                    totalPage: res.body.totalPage
-                });
-
-                // alert(this.state.totalPage);
-                console.log(res.body);
-            });
-    }
+    // componentDidUpdate() {
+    //     // request.get('/api/message')
+    //     //     .query({page: this.state.page})
+    //     //     .end((err, res) => {
+    //     //         this.setState({
+    //     //             messages: res.body.reverse()
+    //     //         });
+    //     //
+    //     //     });
+    //     request.get('/api/message')
+    //
+    //         .query({page: this.state.totalPage})
+    //         .end((err, res) => {
+    //             this.setState({
+    //                 messages: res.body.messages.reverse(),
+    //                 totalPage: res.body.totalPage
+    //             });
+    //
+    //             // alert(this.state.totalPage);
+    //             console.log(res.body);
+    //         });
+    // }
 
     //同步点赞
     componentWillMount() {
@@ -78,6 +79,7 @@ export default class Message extends Component {
                 });
 
             });
+
     }
 
     render() {
