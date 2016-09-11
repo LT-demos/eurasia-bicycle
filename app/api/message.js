@@ -38,7 +38,6 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-    console.log(req.query.page + '====');
     const page = req.query.page;
     Message.find({}, (err, data) => {
         const totalPage = Math.ceil(data.length / 10);
@@ -54,10 +53,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/totalPage', (req, res, next) => {
-    console.log('======');
     Message.find({}, (err, data) => {
         const totalPage = Math.ceil(data.length / 10);
-        console.log("totalPage:" + totalPage);
         res.send({totalPage: totalPage});
     });
 
