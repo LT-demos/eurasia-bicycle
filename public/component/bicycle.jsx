@@ -45,8 +45,8 @@ export default class Bicycle extends Component {
         return <form onSubmit={this._onSubmit.bind(this)}>
             <div className="bicycle">
                 <div className="title col-md-12">
-                    <h2>Eurasia-Bicycles</h2>
-                    <h4>(测试版)</h4>
+                    <h2>UFO</h2>
+                    <h4>(testing)</h4>
                     <hr/>
                 </div>
                 <div className="form-group">
