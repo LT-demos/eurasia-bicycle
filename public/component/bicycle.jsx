@@ -45,26 +45,26 @@ export default class Bicycle extends Component {
         return <form onSubmit={this._onSubmit.bind(this)}>
             <div className="bicycle">
                 <div className="title col-md-12">
-                    <h2>UFO</h2>
+                    <h2>......</h2>
                     <h4>(testing)</h4>
                     <hr/>
                 </div>
                 <div className="form-group">
                     <label>车牌号:</label>
                     <input type="Number" min="0" className="form-control" id="bicycleId"
-                           placeholder="请输入车牌号" required
+                           placeholder="CarNumber" required
                            value={this.state.bicycleId}
                            onChange={this._onNameChange.bind(this)}/>
                 </div>
-                <input type="submit" value="获取密码" className="btn btn-primary btn-bicycle"/>
+                <input type="submit" value="Get" className="btn btn-primary btn-bicycle"/>
                 <hr/>
                 <label>
                     <div id="div2">
-                        累计成功 <span className="userCount">{this.state.userCount}</span> 次
+                        Success: <span className="userCount">{this.state.userCount}</span>
                     </div>
                 </label>
                 <div className="pull-right userViewedCount">
-                    阅读:{this.state.userViewedCount}&nbsp;&nbsp;&nbsp;
+                    Readed:{this.state.userViewedCount}&nbsp;&nbsp;&nbsp;
                     <span className="vote" onClick={this._vote.bind(this)}>
                         &nbsp;
                         <span className="glyphicon glyphicon-thumbs-up"/>
@@ -106,7 +106,7 @@ export default class Bicycle extends Component {
                         password: res.body.password,
                         userCount: res.body.count
                     });
-                    $("#div1").html('<h2>' + '你懂的:' + '<br/>' + this.state.password + '</h2>');
+                    $("#div1").html('<h2>' + '' + '<br/>' + this.state.password + '</h2>');
                     // alert('点个赞吧!');
 
                 }
